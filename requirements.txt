@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+streamlit
+xgboost
+pandas
+joblib
+scikit-survival
+lifelines
