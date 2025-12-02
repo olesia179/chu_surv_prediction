@@ -15,7 +15,8 @@ class XGBModel:
     ord_encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=999)
     ohe_encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
 
-    params = {'objective': 'survival:aft', 'eval_metric': 'aft-nloglik', 'tree_method': 'auto', 'seed': 42, 'verbosity': 0, 'reg_alpha': np.float64(0.5052099414307786), 'reg_lambda': np.float64(0.6377107884457474), 'min_child_weight': np.int64(5), 'max_depth': np.int64(4), 'learning_rate': 0.001, 'subsample': np.float64(0.8669538641818011), 'colsample_bytree': np.float64(0.8951288066582845), 'aft_loss_distribution': 'logistic', 'aft_loss_distribution_scale': np.float64(0.9914290128527132)}
+    # params = {'objective': 'survival:aft', 'eval_metric': 'aft-nloglik', 'tree_method': 'auto', 'seed': 42, 'verbosity': 0, 'reg_alpha': np.float64(0.5052099414307786), 'reg_lambda': np.float64(0.6377107884457474), 'min_child_weight': np.int64(5), 'max_depth': np.int64(4), 'learning_rate': 0.001, 'subsample': np.float64(0.8669538641818011), 'colsample_bytree': np.float64(0.8951288066582845), 'aft_loss_distribution': 'logistic', 'aft_loss_distribution_scale': np.float64(0.9914290128527132)}
+    params = {'objective': 'survival:aft', 'eval_metric': 'aft-nloglik', 'tree_method': 'auto', 'seed': 42, 'verbosity': 0, 'reg_alpha': np.float64(0.8047482880588891), 'reg_lambda': np.float64(5.053721686151811), 'min_child_weight': np.int64(14), 'max_depth': np.int64(4), 'learning_rate': 0.001, 'subsample': np.float64(0.9556029688506168), 'colsample_bytree': np.float64(0.7086830419232711), 'aft_loss_distribution': 'normal', 'aft_loss_distribution_scale': np.float64(0.5932114633181479)}
     
     @staticmethod
     def create_dmatrix(X: Optional[pd.DataFrame], y: Optional[np.ndarray]) -> xgb.DMatrix:
