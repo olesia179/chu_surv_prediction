@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+
 class DataDescriber:
 
     @staticmethod
@@ -14,8 +15,6 @@ class DataDescriber:
 
     @staticmethod
     def describe_outcomes(df: pd.DataFrame):
-        # st.write(df['dead_in_months'].value_counts())
-        # st.write(df['alive_in_months'].value_counts())
 
         alive_after_0_months = (df['dead_in_months']  > 0).sum() + df['alive_in_months'].notna().sum()
         alive_after_1_months = (df['dead_in_months']  > 1).sum() + df['alive_in_months'].notna().sum()
@@ -64,6 +63,5 @@ class DataDescriber:
                                'Percentage' : [propre_idx.sum() / total_est_len * 100,
                                                over_idx.sum() / total_est_len * 100,
                                                (dead_under_cnt + alive_under_cnt) / total_est_len * 100]})
-        # f'{(dead_under_cnt + alive_under_cnt) / total_est_len * 100}: {dead_under_cnt / total_est_len * 100} dead + {alive_under_cnt / total_est_len * 100} alive'
         st.write(result)
 

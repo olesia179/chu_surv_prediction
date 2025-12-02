@@ -9,7 +9,8 @@ st.set_page_config(page_title="Survival Prediction", page_icon="📈")
 st.markdown("# Survival Prediction")
 st.sidebar.header("Predict survival")
 
-API_ENDPOINT = 'http://localhost:8000/predict'
+# API_ENDPOINT = 'http://localhost:8000/predict'
+API_ENDPOINT = 'https://chu-surv-prediction.onrender.com/predict'
 
 def get_values_from_df(column_name, df) :
     """
@@ -74,7 +75,7 @@ def main():
     totalSessions = st.number_input('All volumes sessions', min_value = 1, max_value = 15, value = 1)
 
     prediction = ''
-    col1, col2, col3 = st.columns(3)
+    _, col2, _ = st.columns(3)
     with col2 :
         if col2.button('Predict') :
             data = {'gender': gender,

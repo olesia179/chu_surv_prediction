@@ -90,7 +90,7 @@ def predict(data : request_body):
             'TotalSessions': data.totalSessions
             }])
     patient, _ = DataProcessor(num, ohe, ord).get_df(patient)
-    # print(patient.head())
+    
     prediction = 999
     if os.path.exists('./data/model.ubj'):
         model = xgb.Booster(model_file='./data/model.ubj')

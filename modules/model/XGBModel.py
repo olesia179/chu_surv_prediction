@@ -15,22 +15,6 @@ class XGBModel:
     ord_encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=999)
     ohe_encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
 
-    # params = {'objective': 'survival:aft', 
-    #           'eval_metric': 'aft-nloglik', 
-    #           'tree_method': 'auto', 
-    #           'seed': 42, 
-    #           'verbosity': 0, 
-    #           'reg_alpha': np.float64(1.885273386835653), 
-    #           'reg_lambda': np.float64(1.3866093699752953), 
-    #           'min_child_weight': np.int64(11), 
-    #           'max_depth': np.int64(3), 
-    #           'learning_rate': 0.001, 
-    #           'subsample': np.float64(0.8526048126701572), 
-    #           'colsample_bytree': np.float64(0.7348574730865784), 
-    #           'aft_loss_distribution': 'logistic', 
-    #           'aft_loss_distribution_scale': np.float64(0.5219336218198749)}
-    # params = {'objective': 'survival:aft', 'eval_metric': 'aft-nloglik', 'tree_method': 'auto', 'seed': 42, 'verbosity': 0, 'reg_alpha': np.float64(0.3906708939012361), 'reg_lambda': np.float64(2.654905091866789), 'min_child_weight': np.int64(25), 'max_depth': np.int64(4), 'learning_rate': 0.001, 'subsample': np.float64(0.9964285208619511), 'colsample_bytree': np.float64(0.8253269622787088), 'aft_loss_distribution': 'logistic', 'aft_loss_distribution_scale': np.float64(0.5966331314764576)}
-    # params = {'objective': 'survival:aft', 'aft_loss_distribution': 'logistic', 'aft_loss_distribution_scale': 1.0}
     params = {'objective': 'survival:aft', 'eval_metric': 'aft-nloglik', 'tree_method': 'auto', 'seed': 42, 'verbosity': 0, 'reg_alpha': np.float64(0.5052099414307786), 'reg_lambda': np.float64(0.6377107884457474), 'min_child_weight': np.int64(5), 'max_depth': np.int64(4), 'learning_rate': 0.001, 'subsample': np.float64(0.8669538641818011), 'colsample_bytree': np.float64(0.8951288066582845), 'aft_loss_distribution': 'logistic', 'aft_loss_distribution_scale': np.float64(0.9914290128527132)}
     
     @staticmethod
@@ -42,7 +26,6 @@ class XGBModel:
 
     def prepare_arrays(self, df: pd.DataFrame, num_features: list[str], cat_ohe_features: list[str], cat_ord_features: list[str]) -> tuple[pd.DataFrame, np.ndarray]:
         
-        # cat_ohe_features = list(filter(lambda x : x.rsplit('_', 1)[0] in cat_ohe_features, df.columns.to_list()))
         features = num_features + cat_ohe_features + cat_ord_features
 
         X = df[features]
@@ -129,8 +112,8 @@ class XGBModel:
             result = pd.DataFrame({'xgb_aft_time': times_preds, 'true_time' : time_test, 
                                    'ES_VIM': df.loc[test_idxs, 'ES_VIM'], 'dead': event_test})
             result = result[result['dead'] == 1].reset_index(drop=True)
-            print(result[['xgb_aft_time', 'true_time']].describe())
-            print(result[['xgb_aft_time', 'true_time']].quantile([0.1, 0.25, 0.5, 0.75, 0.9]))
+            # print(result[['xgb_aft_time', 'true_time']].describe())
+            # print(result[['xgb_aft_time', 'true_time']].quantile([0.1, 0.25, 0.5, 0.75, 0.9]))
             return result
         else:
             return pd.DataFrame()
@@ -155,6 +138,6 @@ class XGBModel:
         result = pd.DataFrame({'xgb_aft_time': times_preds, 'true_time' : time_test, 
                                 'ES_VIM': df_val['ES_VIM'], 'dead': event_test})
         result = result[result['dead'] == 1].reset_index(drop=True)
-        print(result[['xgb_aft_time', 'true_time']].describe())
-        print(result[['xgb_aft_time', 'true_time']].quantile([0.1, 0.25, 0.5, 0.75, 0.9]))
+        # print(result[['xgb_aft_time', 'true_time']].describe())
+        # print(result[['xgb_aft_time', 'true_time']].quantile([0.1, 0.25, 0.5, 0.75, 0.9]))
         return result

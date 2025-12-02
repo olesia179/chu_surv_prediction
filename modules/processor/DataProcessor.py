@@ -207,14 +207,12 @@ class DataProcessor:
         df = self.impute_missing_values(df)
 
         df_filtered, df_not_filtered = self.get_eligible_rows(df, last_obs_month, last_obs_year)
-        print(f"Subset length: {df_filtered.shape[0]}")
 
         df, dead_after_idx = self.create_alive_in_months_field(df_filtered, last_obs_month, last_obs_year)
 
         df = self.change_dead_status(df, dead_after_idx)
         
         df = df.drop(columns=self.columns_to_exclude, errors='ignore')
-        print(f"Subset shape: {df.shape}")
 
         if (not_filtered := df_not_filtered) is None:
             return df, None

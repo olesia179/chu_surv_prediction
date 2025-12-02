@@ -3,6 +3,7 @@ from modules.loader.DataLoader import DataLoader
 from modules.processor.DataProcessor import DataProcessor
 from modules.describer.DataDescriber import DataDescriber as describer
 import pandas as pd
+from typing import Optional
 
 st.set_page_config(page_title="Dataset statistic", page_icon="📊")
 
@@ -10,7 +11,7 @@ st.markdown("# Dataset overview")
 st.sidebar.header("Dataset statistic")
 
 @st.cache_data
-def load_data() -> tuple[pd.DataFrame, pd.DataFrame]:
+def load_data() -> tuple[pd.DataFrame, Optional[pd.DataFrame]]:
     data_loader = DataLoader()
     df_raw = data_loader.load_from_csv()
     data_processor = DataProcessor()
