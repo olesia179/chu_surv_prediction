@@ -7,7 +7,7 @@ from typing import Optional
 
 st.set_page_config(page_title="Training", page_icon="📈")
 
-st.markdown("# Survival Prediction")
+st.markdown("# Training Model")
 st.sidebar.header("Training model")
 
 num_features = ['age', 'gender', 'BMI', 'DIA_MAX_TUMEUR_1', 'DIA_MAX_TUMEUR_2', 'DIA_MAX_TUMEUR_3', 'DIA_MAX_TUMEUR_4', 

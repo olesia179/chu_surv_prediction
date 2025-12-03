@@ -7,11 +7,11 @@ class DataDescriber:
     def describe_sample(df: pd.DataFrame, num_fields: list[str] = [], cat_fields: list[str] = []):
         if len(num_fields) > 0:
             st.write("Numerical fields:")
-            st.write(df[num_fields].describe())
+            st.dataframe(df[num_fields].describe())
         if len(cat_fields) > 0:
             st.write("\nCategorical fields:")
             for cat_field in cat_fields:
-                st.write(df[cat_field].value_counts())
+                st.dataframe(df[cat_field].value_counts())
 
     @staticmethod
     def describe_outcomes(df: pd.DataFrame):
@@ -34,7 +34,7 @@ class DataDescriber:
                                                alive_after_2_months / total_len * 100, alive_after_3_months / total_len * 100,
                                                alive_after_4_months / total_len * 100, alive_after_5_months / total_len * 100,
                                                alive_after_6_months / total_len * 100]})
-        st.write(result)
+        st.dataframe(result)
 
 
     @staticmethod
@@ -63,5 +63,5 @@ class DataDescriber:
                                'Percentage' : [propre_idx.sum() / total_est_len * 100,
                                                over_idx.sum() / total_est_len * 100,
                                                (dead_under_cnt + alive_under_cnt) / total_est_len * 100]})
-        st.write(result)
+        st.dataframe(result)
 
